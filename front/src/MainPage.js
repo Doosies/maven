@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
-import CustomButton from './components/Button';
+import Button from './components/Button';
+import Dialog from './components/Dialog';
 
 // const Circle = ()=><div>hi</div>;
 const AppBlock = styled.div`
@@ -11,8 +12,27 @@ const AppBlock = styled.div`
     padding: 1rem;
 `;
 
+const ButtonGroup = styled.div `
+  & + & {
+    margin-top: 1rem;
+  }
+`;
+
 
 function MainPage() {
+  const [dialog, setDialog] = useState(false);
+  const onClick = ()=>{
+    setDialog(true);
+  }
+  const onConfirm = ()=>{
+    console.log("확인");
+    setDialog(false);
+  }
+  const onCancel = ()=>{
+    console.log("취소");
+    setDialog(false);
+  }
+
     return (
         <ThemeProvider
           theme={{
@@ -24,10 +44,52 @@ function MainPage() {
           }}
         >
           <AppBlock>
-            <CustomButton>BUTTON</CustomButton>
-            <CustomButton color="gray">BUTTON</CustomButton>
-            <CustomButton color="pink">BUTTON</CustomButton>
+            <ButtonGroup>
+              <Button size="large">BUTTON</Button>
+              <Button>BUTTON</Button>
+              <Button size="small">BUTTON</Button>
+            </ButtonGroup>
+
+            <ButtonGroup>
+              <Button color="gray" size="large">BUTTON</Button>
+              <Button color="gray">BUTTON</Button>
+              <Button color="gray" size="small">BUTTON</Button>
+            </ButtonGroup>
+
+            <ButtonGroup>
+              <Button color="pink" size="large">BUTTON</Button>
+              <Button color="pink">BUTTON</Button>
+              <Button color="pink" size="small">BUTTON</Button>
+            </ButtonGroup>
+
+            <ButtonGroup>
+              <Button c size="large" outline>BUTTON</Button>
+              <Button color="gray" outline>BUTTON</Button>
+              <Button color="pink" size="small" outline>BUTTON</Button>
+            </ButtonGroup>
+
+            <ButtonGroup>
+              <Button colos="blue" size="large" fullWidth>
+                BUTTON
+              </Button>
+              <Button color="pink" size="large" fullWidth>
+                BUTTON
+              </Button>
+              <Button color="gray" size="large" onClick={onClick} fullWidth>
+                삭제하기
+              </Button>
+            </ButtonGroup>
           </AppBlock>
+
+          <Dialog title="정말로 삭제 하시겠습니까?"
+                  onConfirm={onConfirm}
+                  onCancel={onCancel}
+                  visible={dialog}
+
+          >
+            데이터를 정말로 삭제 하시겠습니까?
+          </Dialog>
+  
         </ThemeProvider>
     );
 
