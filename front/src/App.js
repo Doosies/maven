@@ -1,7 +1,8 @@
-import MainPage from './MainPage';
+import MainPage from './pages/MainPage';
 // import AdminPage from './pages/adminPage';
 // import UserPage from './pages/userPage';
 import {BrowserRouter, Route} from 'react-router-dom';
+import Todo from './pages/Todo';
 // import UserPage from './pages/userPage';
 // import GuestPage from './pages/guestPage';
 // import AdminPage from './pages/adminPage';
@@ -10,7 +11,8 @@ import {BrowserRouter, Route} from 'react-router-dom';
 export default function App(){
     return(
         <BrowserRouter>
-            <Route path="/" component={MainPage} exact/>
+            <Route path="/button" component={MainPage} exact/>
+            <Route path="/todoList" component={Todo}/>
             {/* <Route path="/login" component={UserPage}/> */}
             {/* <Route path="/guest" component={GuestPage}/>
             <Route path="/admin" component={AdminPage}/> */}
