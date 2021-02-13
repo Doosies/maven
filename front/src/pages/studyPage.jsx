@@ -1,43 +1,34 @@
 import React, { useRef, useState } from 'react';
 
-function StudyPage(){
-    const [inputs, setInputs] = useState({
-        name: '',
-        nickname: '',
-    });
-    const nameInput = useRef();
-    const { name, nickname } = inputs;
+//NOTE - 유저를 편하게 출력하기 위한 변수.
+function User({ user, onRemove, onToggle }){
+  return(
+      <div>
+        <b style={{
+          cursor: 'pointer',
+          color: user.active ? 'green' : 'black',
+        }} onClick={()=>onToggle(user.id)}>
+          {user.username}
+        </b>
+        <span>{user.email} </span>
+        <button onClick={()=> onRemove(user.id)}>삭제</button>
+    </div>
+  );
+}
 
-    const onChange = (e) =>{
-        const {value, name} = e.target;
-
-        setInputs({
-            ...inputs,
-            [name]:value
-        });
-    }
-    const onReset = (e) =>{
-        setInputs({
-            name: '',
-            nickname: '',
-        });
-
-        nameInput.current.focus();
-    }
-
+function StudyPage({users, onRemove, onToggle}){
+    
     return(
         <div>
-            <input name="name" placeholder="이름" 
-            onChange={onChange} value={name} ref={nameInput}/>
-            <input name="nickname" placeholder="닉네임" 
-            onChange={onChange} value={nickname}/>
-            <button onClick={onReset}>초기화</button>
-            <div>
-                <b>값: </b>
-                {name} ({nickname})
-            </div>
+          {/* 알고리즘 - 모든 유저의 정보를 출력. */}
+          {users.map( user => 
+          <User 
+            user={user} 
+            key={user.id} 
+            onRemove={onRemove}
+            onToggle={onToggle}
+          /> )}
         </div>
     );
 }
-
 export default StudyPage

@@ -12,6 +12,7 @@ const Remove = styled.div`
     &:hover{
         color: #ff6b6b;
     }
+    /* 이것도 */
     display:none;
 `;
 
