@@ -7,7 +7,7 @@ const Remove = styled.div`
     align-items: center;
     justify-content: center;
     color: #dee2e6;
-    font-size: 24px;
+    font-size: 21px;
     cursor: pointer;
     &:hover{
         color: #ff6b6b;
@@ -38,6 +38,7 @@ const CheckCircle = styled.div`
     justify-content: center;
     margin-right: 20px;
     cursor: pointer;
+
     ${props=>
         props.done &&
         css`
@@ -64,9 +65,11 @@ function TodoItem( { id, done, text } ){
             <CheckCircle done={done}>
                 {done && <MdDone/>}
             </CheckCircle>
+            
             <Text done={done}>
                 {text}
             </Text>
+            
             <Remove>
                 <MdDelete/>
             </Remove>
