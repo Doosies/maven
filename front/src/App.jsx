@@ -2,12 +2,16 @@ import MainPage from './pages/MainPage';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Todo from './pages/Todo';
 import StudyPage from './pages/studyPage';
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useMemo, useEffect} from 'react';
 import CreateUser from './components/users/CreateUser';
+import LightControll from './pages/LightControll';
 
+function countActiveUsers(users){
+    console.log('활성 사용자 수를 세는중...');
+    return users.filter( user => user.active).length;
 
+}
 export default function App(){
-    console.log("렌더링됨!");
 
     //상태 입력한 값들의 상태 관리
     const [inputs, setInputs] = useState({
@@ -70,7 +74,7 @@ export default function App(){
         });
 
         nextId.current += 1;
-        console.log(nextId.current);
+        // console.log(nextId.current);
     }
 
     const onRemove = id=>{
@@ -85,11 +89,15 @@ export default function App(){
             )
         );
     }
+    // const count = countActiveUsers(users);
+    const count = useMemo(()=> countActiveUsers(users), [users]);
+
     return(
         <BrowserRouter>
-            <Route path="/button" component={MainPage} exact/>
+            <Route path="/button" component={MainPage}/>
             <Route path="/todoList" component={Todo} />
-            <Route path="" render={()=> 
+            <Route path="/light" component={LightControll}/>
+            <Route path="/" exact render={()=> 
                 <>
                     <CreateUser
                         username={username}
@@ -98,11 +106,9 @@ export default function App(){
                         onCreate={onCreate}
                     />
                     <StudyPage users={users} onRemove={onRemove} onToggle={onToggle}/>
+                    <div>황성 사용자 수: {count}</div>
                 </>
-            }/>
-            {/* <Route path="/login" component={UserPage}/> */}
-            {/* <Route path="/guest" component={GuestPage}/>
-            <Route path="/admin" component={AdminPage}/> */}
+            } />
         </BrowserRouter>
         
     );
