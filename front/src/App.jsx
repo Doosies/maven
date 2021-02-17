@@ -1,10 +1,13 @@
-import MainPage from './pages/MainPage';
+
+import React, {useRef, useState, useMemo, useEffect, useCallback} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
+
+import MainPage from './pages/MainPage';
 import Todo from './pages/Todo';
-import StudyPage from './pages/studyPage';
-import React, {useRef, useState, useMemo, useEffect} from 'react';
-import CreateUser from './components/users/CreateUser';
+import StudyPage from './pages/UserList';
 import LightControll from './pages/LightControll';
+
+import CreateUser from './components/users/CreateUser';
 
 function countActiveUsers(users){
     console.log('활성 사용자 수를 세는중...');
@@ -57,7 +60,7 @@ export default function App(){
     const nextId = useRef(4);       
 
    //버튼을 눌렀을 때 호출되는 함수.
-    const onCreate = ()=>{          
+    const onCreate = useCallback(()=>{          
         //알고리즘 id로 현재 위치를 줌.
         // username과 email은 입력값에 있는것을 넣어줌
         // 그 후 input란을 비움.
@@ -75,20 +78,21 @@ export default function App(){
 
         nextId.current += 1;
         // console.log(nextId.current);
-    }
+    },[users, username, email]);
 
-    const onRemove = id=>{
+    const onRemove = useCallback(id=>{
         //NOTE -  user.id가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듦.
         //  = user.id가 id인것을 제거함
         setUsers(users.filter(user=>user.id !== id));
-    }
-    const onToggle = id=>{
+    },[users]);
+    
+    const onToggle = useCallback(id=>{
         setUsers(
             users.map(user=>
                 user.id === id ? {...user, active: !user.active} : user
             )
         );
-    }
+    },[users]);
     // const count = countActiveUsers(users);
     const count = useMemo(()=> countActiveUsers(users), [users]);
 

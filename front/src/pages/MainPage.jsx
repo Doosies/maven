@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled, {ThemeProvider} from 'styled-components';
-import Button from '../components/Button';
-import Dialog from '../components/Dialog';
+import Button from '../components/ButtonTest/Button';
+import Dialog from '../components/ButtonTest/Dialog';
 
 // const Circle = ()=><div>hi</div>;
 const AppBlock = styled.div`
