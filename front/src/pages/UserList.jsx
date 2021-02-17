@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 
 //NOTE - 유저를 편하게 출력하기 위한 변수.
 function User({ user, onRemove, onToggle }){
-  useEffect(()=>{
-    // console.log("user 값이 설정됨");
-    // console.log(user);
-    return()=>{
-      // console.log(' user 값이 바뀌기 전');
-      // console.log(user);
-  }
-},[user]);
+//   useEffect(()=>{
+//     // console.log("user 값이 설정됨");
+//     // console.log(user);
+//     return()=>{
+//       // console.log(' user 값이 바뀌기 전');
+//       // console.log(user);
+//   }
+// },[user]);
 
   return(
       <div>
@@ -25,7 +25,7 @@ function User({ user, onRemove, onToggle }){
   );
 }
 
-function StudyPage({users, onRemove, onToggle}){
+function UserList({users, onRemove, onToggle}){
     return(
         <div>
           {/* 알고리즘 - 모든 유저의 정보를 출력. */}
@@ -39,4 +39,5 @@ function StudyPage({users, onRemove, onToggle}){
         </div>
     );
 }
-export default StudyPage
+export default React.memo(UserList,
+  (prevProps, nextProps) => prevProps.users === nextProps.users);

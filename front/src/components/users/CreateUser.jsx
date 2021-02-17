@@ -1,6 +1,7 @@
 import React from 'react';
 
 function CreateUser({ username, email, onChange, onCreate }){
+    console.log("CreateUser 렌더됨");
     return(
         <div>
             <input name="username"
@@ -18,4 +19,4 @@ function CreateUser({ username, email, onChange, onCreate }){
     );
 }
 
-export default CreateUser
+export default React.memo(CreateUser);
