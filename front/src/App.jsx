@@ -7,6 +7,7 @@ import Todo from './pages/Todo';
 import LightControll from './pages/LightControll';
 import Study from './pages/Study';
 import UserPage from './pages/UserPage';
+import ConnectApi from './pages/ConnectApi';
 
 export default function App(){
     return(
@@ -15,6 +16,7 @@ export default function App(){
             <Route path="/todoList" component={Todo} />
             <Route path="/light" component={LightControll}/>
             <Route path="/study" component={Study}/>
+            <Route path="/ConnectAPI" component={ConnectApi}/>
             <Route path="/" component={UserPage} exact/>
         </BrowserRouter>
     );
