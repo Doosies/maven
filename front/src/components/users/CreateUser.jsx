@@ -1,6 +1,28 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
+import useInputs from '../../hooks/useInputs';
+import { UserDispatch } from '../../pages/UserPage';
 
-function CreateUser({ username, email, onChange, onCreate }){
+function CreateUser(){
+
+    const[{username, email}, onChange, reset] = useInputs({
+        username: '',
+        email: ''
+    });
+    const dispatch = useContext(UserDispatch);
+    const nextID = useRef(4);
+    const onCreate = () =>{
+        dispatch({
+            type: 'CREATE_USER',
+            user:{
+                id: nextID.current,
+                username,
+                email
+            }
+        });
+        reset();
+        nextID.current += 1;
+    };
+
     console.log("CreateUser 렌더됨");
     return(
         <div>

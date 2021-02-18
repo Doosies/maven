@@ -1,41 +1,38 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext } from 'react';
+import { UserDispatch } from './UserPage';
 
 //NOTE - 유저를 편하게 출력하기 위한 변수.
-function User({ user, onRemove, onToggle }){
-//   useEffect(()=>{
-//     // console.log("user 값이 설정됨");
-//     // console.log(user);
-//     return()=>{
-//       // console.log(' user 값이 바뀌기 전');
-//       // console.log(user);
-//   }
-// },[user]);
-
+function User({ user }){
+  const dispatch = useContext(UserDispatch);
+  
   return(
       <div>
         <b style={{
           cursor: 'pointer',
           color: user.active ? 'green' : 'black',
-        }} onClick={()=>onToggle(user.id)}>
+        }} 
+        onClick={()=>{
+          dispatch({
+            type: 'TOGGLE_USER', id:user.id
+          })
+        }}
+        >
           {user.username}
         </b>
         <span>{user.email} </span>
-        <button onClick={()=> onRemove(user.id)}>삭제</button>
+        <button onClick={()=>{
+          dispatch({type: 'REMOVE_USER', id: user.id});
+        }}>삭제</button>
     </div>
   );
 }
 
-function UserList({users, onRemove, onToggle}){
+function UserList({users}){
     return(
         <div>
           {/* 알고리즘 - 모든 유저의 정보를 출력. */}
           {users.map( user => 
-          <User 
-            user={user} 
-            key={user.id} 
-            onRemove={onRemove}
-            onToggle={onToggle}
-          /> )}
+          <User user={user} key={user.id} /> )}
         </div>
     );
 }
