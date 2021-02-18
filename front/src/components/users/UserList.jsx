@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { UserDispatch } from './UserPage';
+import { UserDispatch } from '../../pages/UserPage';
 
 //NOTE - 유저를 편하게 출력하기 위한 변수.
 function User({ user }){
@@ -16,9 +16,7 @@ function User({ user }){
             type: 'TOGGLE_USER', id:user.id
           })
         }}
-        >
-          {user.username}
-        </b>
+        >{user.username}</b>
         <span>{user.email} </span>
         <button onClick={()=>{
           dispatch({type: 'REMOVE_USER', id: user.id});
@@ -32,9 +30,8 @@ function UserList({users}){
         <div>
           {/* 알고리즘 - 모든 유저의 정보를 출력. */}
           {users.map( user => 
-          <User user={user} key={user.id} /> )}
+            <User user={user} key={user.id} /> )}
         </div>
     );
 }
-export default React.memo(UserList,
-  (prevProps, nextProps) => prevProps.users === nextProps.users);
+export default React.memo(UserList);

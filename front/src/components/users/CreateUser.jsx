@@ -3,13 +3,14 @@ import useInputs from '../../hooks/useInputs';
 import { UserDispatch } from '../../pages/UserPage';
 
 function CreateUser(){
-
+    console.log("CreateUser 렌더");
     const[{username, email}, onChange, reset] = useInputs({
         username: '',
         email: ''
     });
     const dispatch = useContext(UserDispatch);
     const nextID = useRef(4);
+    
     const onCreate = () =>{
         dispatch({
             type: 'CREATE_USER',
@@ -22,8 +23,6 @@ function CreateUser(){
         reset();
         nextID.current += 1;
     };
-
-    console.log("CreateUser 렌더됨");
     return(
         <div>
             <input name="username"
