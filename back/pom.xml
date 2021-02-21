@@ -18,6 +18,23 @@
 		<java.version>15</java.version>
 	</properties>
 	<dependencies>
+
+
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>2.1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>	
+		<!-- <dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.18</version>
+		</dependency> -->
+
 		<!-- ㄴㄴㄴ -->
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -85,8 +102,8 @@
 							<goal>install-node-and-npm</goal> <!-- node & npm 설치 -->
 						</goals>
 						<configuration>
-							<nodeVersion>v15.8.0</nodeVersion> <!-- 설치할 nodeJs 의 버전 -->
-							<npmVersion>7.4.3</npmVersion>  <!-- 설치할 npm 의 버전 -->
+							<nodeVersion>v15.9.0</nodeVersion> <!-- 설치할 nodeJs 의 버전 -->
+							<npmVersion>7.5.3</npmVersion>  <!-- 설치할 npm 의 버전 -->
 						</configuration>
 					</execution>
 					<execution>
